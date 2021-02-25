@@ -1,6 +1,6 @@
 import React from 'react';
 
-const App = props = (
+const App = (props) => (
   <div>Hello World from App</div>
 )
 

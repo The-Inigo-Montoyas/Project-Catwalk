@@ -1,4 +1,5 @@
 import React from 'react';
+import RatingsApp from './ratings/RatingsApp.js'
 
 const App = (props) => (
   <div>
@@ -7,7 +8,7 @@ const App = (props) => (
       this is the product view
     </div>
     <div id="reviews-ratings">
-      this is where the reviews and rating are
+      <RatingsApp />
     </div>
   </div>
 )

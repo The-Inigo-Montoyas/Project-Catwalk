@@ -6,7 +6,9 @@ const App = (props) => (
     <div id="productDetail">
       this is the product view
     </div>
-
+    <div id="reviews-ratings">
+      this is where the reviews and rating are
+    </div>
   </div>
 )
 

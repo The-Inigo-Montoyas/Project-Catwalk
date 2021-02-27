@@ -1,4 +1,5 @@
 import React from 'react';
+import RatingsApp from './ratings/RatingsApp.js'
 
 const App = (props) => (
   <div>
@@ -44,7 +45,9 @@ const App = (props) => (
         </div>
       </div>
     </div>
-
+    <div id="reviews-ratings">
+      <RatingsApp />
+    </div>
   </div>
 )
 

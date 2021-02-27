@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AnswerEntry from './AnswerEntry.jsx';
 
 const AnswersList = (props) => {
+  // console.log('answersList props: ', props)
+  // const [answers, setAnswers] = useState(props)
+  // for (let key in props.answer) {
+  //   let answer = props.answer[key].body;
+  // }
+  const answerValues = Object.values(props.answer);
   return (
     <div className='answer-list'>
-      <div><AnswerEntry /> </div>
+      <div>
+        {answerValues.map((answer, idx) => 
+          <AnswerEntry key={answer + idx} answer={answer}/> 
+        )}
+        </div>
       <form className='load-answers'> 
         <input type="submit" value="Load More Answers" />
       </form>

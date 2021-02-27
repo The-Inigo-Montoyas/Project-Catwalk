@@ -2,10 +2,9 @@ import React from 'react';
 
 const SearchBar = (props) => {
   return (
-    <form>
+    <form className='searchbar'>
       <label>
-        Have a question? Search for Answers
-        <input type="text" name="name" />
+        <input type="text" name="name" placeholder="Have a question? Search for Answers"/>
       </label>
     </form>
   )

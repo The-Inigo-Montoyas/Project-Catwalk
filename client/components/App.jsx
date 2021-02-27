@@ -49,7 +49,7 @@ const App = (props) => (
     <div id="reviews-ratings">
       <RatingsApp />
     </div>
-    <div id="questions_answers">
+    <div id="questions-answers">
       <QuestionsList />
     </div>
   </div>

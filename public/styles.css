@@ -48,3 +48,48 @@ body {
   line-height: 25px;
   margin: 25px 14px;
 }
+
+/* ============== Product Details ================== */
+.border {
+  border: 1px solid #000000;
+}
+
+.star {
+  display: inline;
+  flex: 1 1 auto
+}
+
+.flexSpaceBetween {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flexAuto1 {
+  flex: 1 1 auto;
+}
+
+#productContainer {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+
+}
+
+#productImageView {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+#productView {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto
+}
+
+#imgNormalView {
+  width: 600px;
+}
+
+#addToBag {
+  display: flex;
+}

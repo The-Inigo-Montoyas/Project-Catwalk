@@ -2,8 +2,15 @@ import React from 'react';
 import RatingsApp from './ratings/RatingsApp.js'
 import QuestionsList from './Questions/QuestionsList.jsx';
 
-const App = (props) => (
-  <div>
+const App = () => (
+  <div className="gridContainer">
+    <div className="header">
+      <div className="inner-header">
+        <img className="logo-img" src="./img/ankylosaur1.jpg" alt="logo" />
+        <p className="logo">Agile Creations</p>
+        <input className="logo-search" placeholder="search..." />
+      </div>
+    </div>
     <div id="productContainer" className="border">
       <div id="productImageView" className="border">
         <div id="imgViewerComponent">
@@ -19,33 +26,35 @@ const App = (props) => (
             <span> discounted price</span>
           </div>
           <div>
-            STYLE > SELECTED STYLE
+            STYLE &gt; SELECTED STYLE
           </div>
           <div className="styleView">
             <div>style row 1</div>
             <div>style row 2</div>
           </div>
-          <select name="SELECT SIZE">
+          <select id="sizeBar" name="SELECT SIZE">
             <option value="">-</option>
             <option value="1">1</option>
             <option value="2">2</option>
           </select>
-          <select name="QUANTITY">
+          <select id="qtyBar" className="m20" name="QUANTITY">
             <option value="1">1</option>
             <option value="2">2</option>
           </select>
           <div className="flexSpaceBetween">
-            <div id="addToBag" className="flexAuto1">
-              <span className="">ADD TO BAG</span>
+            <div id="addToBag" className="m20">
+              <span>ADD TO BAG</span>
               <span className=""> +</span>
             </div>
-            <div className="star">
-              STAR
+            <div className="star m20">
+              *
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div className="gridSpacer gridFracOne" />
+    <div id="productDiscContainer">Product disc</div>
     <div id="reviews-ratings">
       <RatingsApp />
     </div>
@@ -53,6 +62,6 @@ const App = (props) => (
       <QuestionsList />
     </div>
   </div>
-)
+);
 
 export default App;

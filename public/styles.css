@@ -12,8 +12,6 @@ body {
 }
 
 .header {
-  grid-column: 1 / 9;
-  grid-row: 1;
   background-color: navy;
   width: 100%;
   height: 75px;
@@ -53,9 +51,13 @@ body {
 
 .gridContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.gridMainTemplate {
+  grid-template-columns: 1fr 4fr 1fr;
   grid-gap: 1em;
 }
+
 
 .gridFracOne {
   grid-column: 1fr;
@@ -65,6 +67,10 @@ body {
 
 .border {
   border: 1px solid #000000;
+}
+
+.widthAuto {
+  width: auto;
 }
 
 .star {
@@ -93,8 +99,26 @@ body {
   flex: 1 1 auto;
 }
 
+.flexGrow1 {
+  flex: 1;
+}
+.flexGrow2 {
+  flex: 2;
+}
+.flexGrow3 {
+  flex: 3;
+}
+.flexGrow4 {
+  flex: 4;
+}
+.flexGrow5 {
+  flex: 5;
+}
+.flexGrow6 {
+  flex: 6;
+}
+
 #productContainer {
-  grid-row: 2;
   display: flex;
   justify-content: center;
   align-items: stretch;
@@ -131,7 +155,10 @@ body {
 }
 
 #productDiscContainer {
-  grid-row: 3;
+  display: flex;
+}
+#productDiscContainer > ul{
+  width: auto;
 }
 
 
@@ -139,7 +166,6 @@ body {
 
 
 /* ------------------------- Questions and Answers Module -----------------------------*/
-
 
 
 

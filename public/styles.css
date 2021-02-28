@@ -49,15 +49,42 @@ body {
   margin: 25px 14px;
 }
 
+.gridContainer {
+  display: grid;
+}
+
+.gridMainTemplate {
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-gap: 1em;
+}
+
+
+.gridFracOne {
+  grid-column: 1fr;
+}
+
 /* ------------------------- Product Overview Module -----------------------------*/
 
 .border {
   border: 1px solid #000000;
 }
 
+.widthAuto {
+  width: auto;
+}
+
 .star {
   display: inline;
-  flex: 1 1 auto
+  justify-content: center;
+  border: 1px solid gray;
+}
+
+.p10 {
+  padding: 10px;
+}
+
+.m20 {
+  margin: 20px;
 }
 
 .flexSpaceBetween {
@@ -67,6 +94,28 @@ body {
 
 .flexAuto1 {
   flex: 1 1 auto;
+}
+.flexAuto2 {
+  flex: 1 1 auto;
+}
+
+.flexGrow1 {
+  flex: 1;
+}
+.flexGrow2 {
+  flex: 2;
+}
+.flexGrow3 {
+  flex: 3;
+}
+.flexGrow4 {
+  flex: 4;
+}
+.flexGrow5 {
+  flex: 5;
+}
+.flexGrow6 {
+  flex: 6;
 }
 
 #productContainer {
@@ -88,20 +137,35 @@ body {
 }
 
 #imgNormalView {
-  width: 600px;
+  width: 750px;
+}
+
+#sizeBar {
+
 }
 
 #addToBag {
   display: flex;
+  margin-right: 10px;
+  border: 1px solid gray;
 }
 
+#addToBag span, .star {
+  padding: 10px;
+}
+
+#productDiscContainer {
+  display: flex;
+}
+#productDiscContainer > ul{
+  width: auto;
+}
 
 
 
 
 
 /* ------------------------- Questions and Answers Module -----------------------------*/
-
 
 
 

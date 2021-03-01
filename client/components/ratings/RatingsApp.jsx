@@ -1,9 +1,9 @@
 import React from 'react';
-import Breakdown from './data-breakdown.js';
+import Breakdown from './data-breakdown.jsx';
 
-const RatingsApp = (props) => (
+const RatingsApp = () => (
   <div className="ratings-module">
-    <h4>Ratings &amp; Reviews</h4>
+    <span className="ratings-title">Ratings &amp; Reviews</span>
     <div className="metadata-sidebar">
       <Breakdown />
     </div>

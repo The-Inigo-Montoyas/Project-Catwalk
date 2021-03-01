@@ -1,5 +1,5 @@
 import React from 'react';
-import RatingsApp from './ratings/RatingsApp.js'
+import RatingsApp from './ratings/RatingsApp.jsx';
 import QuestionsList from './Questions/QuestionsList.jsx';
 
 const App = () => (
@@ -18,7 +18,7 @@ const App = () => (
       <div id="productContainer" className="border">
         <div id="productImageView" className="border">
           <div id="imgViewerComponent">
-            <img id="imgNormalView" src="https://images.unsplash.com/photo-1553830591-d8632a99e6ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1511&q=80"></img>
+            { <img id="imgNormalView" src="https://images.unsplash.com/photo-1553830591-d8632a99e6ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1511&q=80"></img> }
           </div>
           <div id="productView">
             this is the product view

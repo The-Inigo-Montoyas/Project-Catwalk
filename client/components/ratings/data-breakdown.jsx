@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import sampleObj from '../Sample_data/single_product_metadata.js'
-import StarGraph from './StarGraph.js'
+import sampleObj from '../Sample_data/single_product_metadata.js';
+import StarGraph from './StarGraph.jsx';
+import Characteristics from './characteristics.jsx';
 
 class Breakdown extends React.Component {
   constructor (props) {
@@ -55,12 +56,19 @@ class Breakdown extends React.Component {
     console.log(goodData);
     return (
       <div>
-        <h1>{goodData.weightedAvg}</h1>
+        <h1 className="overall-rating">{goodData.weightedAvg}</h1>
         <div>
-          <span className="star fa fa-star">Stars go here</span>
+          <span className="stars-rating">
+            <span className="star-shape"></span>
+            <span className="star-shape"></span>
+            <span className="star-shape"></span>
+            <span className="star-shape"></span>
+            <span className="star-shape"></span>
+          </span>
         </div>
-        <p>{goodData.pctRecommend}% of reviews recommend this product</p>
+        <div className="percent-reviews">{goodData.pctRecommend}% of reviews recommend this product</div>
         <StarGraph stars={goodData.stars} reviews={goodData.totalReviews}/>
+        <Characteristics qualities={goodData.characteristics}/>
       </div>
     )
   }

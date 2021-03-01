@@ -15,7 +15,7 @@ const QuestionsList = (props) => {
         <SearchBar />
       </div>
       <div>
-        {data.map((question, idx) => 
+        {data.map((question, idx) =>
           <QuestionEntry key={question + idx} question={question}/>
         )}
       </div>
@@ -24,7 +24,7 @@ const QuestionsList = (props) => {
         <input type='submit' value='Add A Question +' />
       </form>
     </div>
-  )   
+  )
 }
 
 export default QuestionsList;

@@ -1,12 +1,11 @@
-const axios = require('axios');
-const TOKEN = require('../../config.js');
-
 import React from 'react';
 import { useState } from 'react';
 import RatingsApp from './ratings/RatingsApp.jsx';
 import QuestionsList from './Questions/QuestionsList.jsx';
 import ProductDetailsView from './productDetails/ProductDetailsView.jsx';
 import ProductDescription from './productDetails/ProductDescription.jsx';
+const axios = require('axios');
+const TOKEN = require('../../config.js');
 
 const App = () => {
   const [product, setProduct] = useState([]);

@@ -50,8 +50,117 @@ body {
   margin: 25px 14px;
 }
 
+.gridContainer {
+  display: grid;
+}
+
+.gridMainTemplate {
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-gap: 1em;
+}
+
+
+.gridFracOne {
+  grid-column: 1fr;
+}
+
 /* ------------------------- Product Overview Module -----------------------------*/
 
+.border {
+  border: 1px solid #000000;
+}
+
+.widthAuto {
+  width: auto;
+}
+
+.star {
+  display: inline;
+  justify-content: center;
+  border: 1px solid gray;
+}
+
+.p10 {
+  padding: 10px;
+}
+
+.m20 {
+  margin: 20px;
+}
+
+.flexSpaceBetween {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flexAuto1 {
+  flex: 1 1 auto;
+}
+.flexAuto2 {
+  flex: 1 1 auto;
+}
+
+.flexGrow1 {
+  flex: 1;
+}
+.flexGrow2 {
+  flex: 2;
+}
+.flexGrow3 {
+  flex: 3;
+}
+.flexGrow4 {
+  flex: 4;
+}
+.flexGrow5 {
+  flex: 5;
+}
+.flexGrow6 {
+  flex: 6;
+}
+
+#productContainer {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+
+}
+
+#productImageView {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+#productView {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto
+}
+
+#imgNormalView {
+  width: 750px;
+}
+
+#sizeBar {
+
+}
+
+#addToBag {
+  display: flex;
+  margin-right: 10px;
+  border: 1px solid gray;
+}
+
+#addToBag span, .star {
+  padding: 10px;
+}
+
+#productDiscContainer {
+  display: flex;
+}
+#productDiscContainer > ul{
+  width: auto;
+}
 
 
 
@@ -63,14 +172,32 @@ body {
 
 
 
-
 /* ------------------------- Reviews and Ratings Module -----------------------------*/
 
 .metadata-sidebar {
   width: 30%;
   display: inline-block;
 }
+.ratings-title {
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 16px;
+  display: inline-block;
+}
 
+.overall-rating {
+  float: left;
+  height: 45px;
+  font-weight: bold;
+}
+.stars-rating {
+  display: inline-block;
+  padding: 5px 0 20px 10px;
+  height: 20px;
+}
+.percentage-reviews{
+  width: 100%;
+}
 .reviews {
   width: 67%;
   display: inline;
@@ -83,25 +210,32 @@ body {
 }
 .starBox p {
   color: #000;
-  text-transform: uppercase;
-  margin: 0 0 10px;
+  margin: 0;
   padding: 0;
   letter-spacing: 1px;
 }
 .starBox p:nth-child(2) {
   float: right;
   position: relative;
-  top: -30px;
+  top: -20px;
 }
-.star {
-  background: #262626;
+.starbar {
+  background: #aaa;
   padding: 4px;
   box-sizing: border-box;
-  border: 1px solid #0fffb7;
+  border: 1px solid #074b36;
   border-radius: 2px;
 }
-.star-level {
-  background: #0fffb7;
+.starbar-level {
+  background: #074b36;
   width: 100%;
   height:10px;
+}
+.star-shape {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  background-color: #999;
+  clip-path: polygon(50% 0%, 63% 38%, 100% 38%, 69% 59%, 82% 100%, 50% 75%, 18% 100%, 31% 59%, 0% 38%, 37% 38%);
+  -webkit-clip-path: polygon(50% 0%, 63% 38%, 100% 38%, 69% 59%, 82% 100%, 50% 75%, 18% 100%, 31% 59%, 0% 38%, 37% 38%);
 }

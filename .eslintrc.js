@@ -19,6 +19,5 @@ module.exports = {
     'react',
   ],
   rules: {
-    *.js text eol=lf
   },
 };

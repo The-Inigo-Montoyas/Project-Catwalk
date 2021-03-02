@@ -1,11 +1,11 @@
 import React from 'react';
 
-const ProductDetails = () => (
+const ProductDetails = (props) => (
   <div id="productView">
-    this is the product view
-    <div>this is the rating component</div>
-    <span>CATEGORY</span>
-    <h1>Expanded product name</h1>
+    <div>ratings component</div>
+    {console.log('this is product', props.product)}
+    <span>{props.product.category}</span>
+    <h1>{props.product.name}</h1>
     <div>
       <span>$price</span>
       <span> discounted price</span>

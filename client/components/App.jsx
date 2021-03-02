@@ -21,7 +21,7 @@ const App = () => {
       },
     })
       .then((productRes) => {
-        // console.log(productRes.data[0]);
+        console.log(productRes.data[0]);
         setProduct(productRes.data[0]);
         axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/${productRes.data[0].id}/styles`, {
           headers: {
@@ -29,7 +29,7 @@ const App = () => {
           },
         })
           .then((styleRes) => {
-            // console.log(styleRes);
+            console.log(styleRes.data);
             setStyles(styleRes.data);
           })
           .catch((err) => {
@@ -56,7 +56,7 @@ const App = () => {
         </div>
         <div className="gridSpacer" />
         <div className="gridSpacer" />
-        <ProductDetailsView product={product} />
+        <ProductDetailsView product={product} style={styles} />
         <div className="gridSpacer" />
         <div className="gridSpacer" />
         <ProductDescription />

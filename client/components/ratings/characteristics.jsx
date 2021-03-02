@@ -2,7 +2,6 @@ import React from 'react';
 
 const Characteristics = function(props) {
   const quals = Object.keys(props.qualities)
-  console.log(props.qualities, quals);
   return (
     <div className="quality">
       {quals.map( (quality, idx) =>

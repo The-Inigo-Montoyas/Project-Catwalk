@@ -8,7 +8,7 @@ const StarGraph = function(props) {
     width[key] = `width: "${percent[key]}%"`
   }
   var widthFive = width[5];
-  console.log(width[5], widthFive, percent[5], `"${percent[5]}%"`);
+  //console.log(width[5], widthFive, percent[5], `"${percent[5]}%"`);
     return (
       <div className="star-graph">
         <div className="starBox">

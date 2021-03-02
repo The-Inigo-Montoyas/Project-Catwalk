@@ -138,7 +138,11 @@ body {
 }
 
 #imgNormalView {
-  width: 750px;
+  display: block;
+  max-width: 750px;
+  max-height: 700px;
+  width: auto;
+  height: auto;
 }
 
 #sizeBar {
@@ -162,7 +166,15 @@ body {
   width: auto;
 }
 
+/*product details*/
 
+.styleThumbnail {
+  width: 40px;
+  height: 40px;
+  border-radius: 2em;
+  border: 1px solid black;
+  margin: 5px;
+}
 
 
 

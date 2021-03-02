@@ -1,21 +1,26 @@
 import React from 'react';
+import StyleView from './StyleView.jsx';
+
+
 
 const ProductDetails = (props) => (
   <div id="productView">
     <div>ratings component</div>
-    {console.log('this is product', props.product)}
+    {/* {console.log('this is product', props.product)} */}
     <span>{props.product.category}</span>
-    <h1>{props.product.name}</h1>
+    <h1>{props.styles[props.selectedStyle].name} {props.product.name}</h1>
     <div>
-      <span>$price</span>
-      <span> discounted price</span>
+      {props.styles[props.selectedStyle].sale_price ? `$${props.styles[props.selectedStyle].original_price} $${props.styles[props.selectedStyle].sale_price}` : <span>${props.styles[props.selectedStyle].original_price}</span>}
     </div>
     <div>
-      STYLE &gt; SELECTED STYLE
+      STYLE &gt; {props.styles[props.selectedStyle].name}
     </div>
     <div className="styleView">
-      <div>style row 1</div>
-      <div>style row 2</div>
+      <StyleView
+        product={props.product}
+        styles={props.styles}
+        selectedStyle={props.selectedStyle}
+      />
     </div>
     <select id="sizeBar" name="SELECT SIZE">
       <option value="">-</option>

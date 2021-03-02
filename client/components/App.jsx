@@ -9,7 +9,18 @@ const TOKEN = require('../../config.js');
 
 const App = () => {
   const [product, setProduct] = useState([]);
-  const [styles, setStyles] = useState([]);
+  const [styles, setStyles] = useState([
+    {
+      name: '',
+      sale_price: '',
+      photos: [{
+        thumbnail_url: '',
+        url: '',
+      }],
+      style_id: '00000',
+    },
+  ]);
+  const [selectedStyle, setSelectedStyle] = useState(0);
 
   const getOneProduct = () => {
     axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products', {
@@ -29,8 +40,8 @@ const App = () => {
           },
         })
           .then((styleRes) => {
-            // console.log(styleRes);
-            setStyles(styleRes.data);
+            // console.log(styleRes.data.results);
+            setStyles(styleRes.data.results);
           })
           .catch((err) => {
             throw err;
@@ -56,10 +67,10 @@ const App = () => {
         </div>
         <div className="gridSpacer" />
         <div className="gridSpacer" />
-        <ProductDetailsView product={product} />
+        <ProductDetailsView product={product} styles={styles} selectedStyle={selectedStyle} />
         <div className="gridSpacer" />
         <div className="gridSpacer" />
-        <ProductDescription />
+        <ProductDescription product={product} styles={styles} selectedStyle={selectedStyle} />
         <div className="gridSpacer" />
         <div className="gridSpacer" />
         <div id="questions-answers">

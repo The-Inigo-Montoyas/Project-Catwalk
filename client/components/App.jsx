@@ -1,14 +1,15 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import RatingsApp from './ratings/RatingsApp.jsx';
 import QuestionsList from './Questions/QuestionsList.jsx';
 import ProductDetailsView from './productDetails/ProductDetailsView.jsx';
 import ProductDescription from './productDetails/ProductDescription.jsx';
+
 const axios = require('axios');
 const TOKEN = require('../../config.js');
 
 const App = () => {
   const [product, setProduct] = useState([]);
+  const [styles, setStyles] = useState([]);
 
   const getOneProduct = () => {
     axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products', {
@@ -19,16 +20,28 @@ const App = () => {
         count: 1,
       },
     })
-      .then((res) => {
-        setProduct(res.data[0]);
+      .then((productRes) => {
+        // console.log(productRes.data[0]);
+        setProduct(productRes.data[0]);
+        axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/${productRes.data[0].id}/styles`, {
+          headers: {
+            Authorization: TOKEN,
+          },
+        })
+          .then((styleRes) => {
+            // console.log(styleRes);
+            setStyles(styleRes.data);
+          })
+          .catch((err) => {
+            throw err;
+          });
       })
       .catch((err) => {
-        console.log(err);
+        throw err;
       });
   };
 
   useState(getOneProduct);
-
 
   return (
     <div className="">
@@ -43,7 +56,7 @@ const App = () => {
         </div>
         <div className="gridSpacer" />
         <div className="gridSpacer" />
-        <ProductDetailsView product={product}/>
+        <ProductDetailsView product={product} />
         <div className="gridSpacer" />
         <div className="gridSpacer" />
         <ProductDescription />

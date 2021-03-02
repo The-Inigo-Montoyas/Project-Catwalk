@@ -1,5 +1,6 @@
-//Sample Product Metadata
-var sample = {
+//Sample Product Metadata for product 20111 from postman
+//http://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/reviews/meta?product_id=20111
+var metadata = {
     "product_id": "20111",
     "ratings": {
         "1": "10",
@@ -32,4 +33,4 @@ var sample = {
     }
 }
 
-export default sample;
+export default metadata;

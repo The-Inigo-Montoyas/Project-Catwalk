@@ -4,25 +4,8 @@ import sampleObj from '../Sample_data/SampleMetadata.js';
 import StarGraph from './StarGraph.jsx';
 import Characteristics from './characteristics.jsx';
 
-class Breakdown extends React.Component {
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      productId: 0
-    }
-
-    this.transformData = this.transformData.bind(this);
-
-  }
-
-  getProductMetadata(product_id) {
-    axios.get('/products/metadata')
-      .then( () => console.log(data))
-      .catch( () => console.log(err));
-  }
-
-  transformData(dataObj) {
+var Breakdown = (props) => {
+  const transformData = function(dataObj) {
     //initialize the transformed data obj
     let results = {};
 
@@ -40,35 +23,34 @@ class Breakdown extends React.Component {
       results.totalReviews += results.stars[i];
       results.weightedTotal += results.stars[i] * Number.parseInt(i);
     }
-    results.weightedAvg = (Math.round(10 * results.weightedTotal / results.totalReviews)) / 10;
+    if (results.totalReviews) {
+      results.weightedAvg = (Math.round(10 * results.weightedTotal / results.totalReviews)) / 10;
+    }
 
     //save all the characteristics into the new obj
     results.characteristics = {};
     for ( var key in dataObj.characteristics) {
       results.characteristics[key] = dataObj.characteristics[key].value
     }
-
     return results;
   }
+  console.log(props);
+  var goodData = transformData(props.metaData);
 
-  render (props) {
-    var goodData = this.transformData(sampleObj);
-    console.log(goodData);
-    return (
+  return (
+    <div>
+      <h1 className="overall-rating">{goodData.weightedAvg}</h1>
       <div>
-        <h1 className="overall-rating">{goodData.weightedAvg}</h1>
-        <div>
-          <span className="stars-rating">
-            {[...Array(5)].map( (star, idx) => (
-              <span key={'overallkey' + idx} className="star-shape"></span> ))}
-          </span>
-        </div>
-        <div className="percent-reviews">{goodData.pctRecommend}% of reviews recommend this product</div>
-        <StarGraph stars={goodData.stars} reviews={goodData.totalReviews}/>
-        <Characteristics qualities={goodData.characteristics}/>
+        <span className="stars-rating">
+          {[...Array(5)].map( (star, idx) => (
+            <span key={'overallkey' + idx} className="star-shape"></span> ))}
+        </span>
       </div>
-    )
-  }
+      <div className="percent-reviews">{goodData.pctRecommend}% of reviews recommend this product</div>
+      <StarGraph stars={goodData.stars} reviews={goodData.totalReviews}/>
+      <Characteristics qualities={goodData.characteristics}/>
+    </div>
+  )
 }
 
 export default Breakdown;

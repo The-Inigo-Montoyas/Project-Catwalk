@@ -4,10 +4,8 @@ const StarGraph = function(props) {
   let percent = {};
   let width = {};
   for (var key in props.stars) {
-    console.log(props.reviews, props.stars[key]);
     percent[key] = Math.round(100 * props.stars[key] / props.reviews);
     width[key] = `width: "${percent[key]}%"`
-    console.log(percent[key], width[key]);
   }
   var widthFive = width[5];
   console.log(width[5], widthFive, percent[5], `"${percent[5]}%"`);
@@ -17,7 +15,7 @@ const StarGraph = function(props) {
           <p>5 Stars</p>
           <p>{props.stars[5]}</p>
           <div className="starbar">
-            <div className="starbar-level" style={{width: "18%"}}></div>
+            <div className="starbar-level" style={{'width': "18%"}}></div>
           </div>
         </div>
         <div className="starBox">

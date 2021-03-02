@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import sampleObj from '../Sample_data/single_product_metadata.js';
+import sampleObj from '../Sample_data/SampleMetadata.js';
 import StarGraph from './StarGraph.jsx';
 import Characteristics from './characteristics.jsx';
 
@@ -59,11 +59,8 @@ class Breakdown extends React.Component {
         <h1 className="overall-rating">{goodData.weightedAvg}</h1>
         <div>
           <span className="stars-rating">
-            <span className="star-shape"></span>
-            <span className="star-shape"></span>
-            <span className="star-shape"></span>
-            <span className="star-shape"></span>
-            <span className="star-shape"></span>
+            {[...Array(5)].map( (star, idx) => (
+              <span key={'overallkey' + idx} className="star-shape"></span> ))}
           </span>
         </div>
         <div className="percent-reviews">{goodData.pctRecommend}% of reviews recommend this product</div>

@@ -18,6 +18,12 @@ const App = () => {
         url: '',
       }],
       style_id: '00000',
+      skus: {
+        0: {
+          quantity: 0,
+          size: '',
+        },
+      },
     },
   ]);
   const [selectedStyle, setSelectedStyle] = useState(0);
@@ -32,14 +38,31 @@ const App = () => {
   const [reviews, setReviews] = useState([]);
   const [questions, setQuestions] = useState([]);
 
+  // functions
+  const handleStyleClick = (e) => {
+    setSelectedStyle(parseInt(e.target.attributes.styleidx.value), 10);
+  };
+
   const getOneProduct = () => {
     // this url tests for 4+ styles and items on sale
-    // const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20118';
+    const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20118';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
+    const productLimit = 20;
+    const randomNumberGenerator = (max) => {
+      let result = Math.floor(Math.random() * Math.floor(max));
+      if (result < 10) {
+        result = `2011${result.toString()}`;
+        return result;
+      }
+      result = `201${result.toString()}`;
+      return result;
+    };
+    const randomProductUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/${randomNumberGenerator(productLimit).toString()}/styles`;
+    console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
-    axios.get(`${url}products`, {
+    axios.get(randomProductUrl, {
       headers: {
         Authorization: TOKEN,
       },
@@ -47,20 +70,21 @@ const App = () => {
         count: 1,
       },
     })
-      .then((productRes) => {
-        // console.log(productRes.data[0]);
-        setProduct(productRes.data[0]);
-        // get the styles data from the default product id
-        axios.get(`${url}products/${productRes.data[0].id}/styles`, {
-          headers: {
-            Authorization: TOKEN,
-          },
-        })
+      // .then((productRes) => {
+      //   // console.log(productRes.data[0]);
+      //   setProduct(productRes.data);
+      //   // get the styles data from the default product id
+      //   axios.get(`${url}products/${productRes.data.id}/styles`, {
+      //     headers: {
+      //       Authorization: TOKEN,
+      //     },
+      //   })
           .then((styleRes) => {
             // console.log(styleRes);
             setStyles(styleRes.data.results);
             // get the reviews meta data from the default product id
-            axios.get(`${url}reviews/meta?product_id=${productRes.data[0].id}`, {
+            // console.log(styleRes.data)
+            axios.get(`${url}reviews/meta?product_id=${styleRes.data.product_id}`, {
               headers: {
                 Authorization: TOKEN,
               },
@@ -72,7 +96,7 @@ const App = () => {
                                  + parseInt(metaData.recommended.true, 10);
                 setMeta(metaData);
                 // get all reviews for the default product id
-                axios.get(`${url}reviews/?product_id=${productRes.data[0].id}&count=${totalReviews}`, {
+                axios.get(`${url}reviews/?product_id=${styleRes.data.product_id}&count=${totalReviews}`, {
                   headers: {
                     Authorization: TOKEN,
                   },
@@ -80,7 +104,7 @@ const App = () => {
                   .then((reviews) => {
                     setReviews(reviews.data.results);
                     // get questions for q&a
-                    axios.get(`${url}qa/questions/?product_id=${productRes.data[0].id}`, {
+                    axios.get(`${url}qa/questions/?product_id=${styleRes.data.product_id}`, {
                       headers: {
                         Authorization: TOKEN,
                       },
@@ -103,10 +127,10 @@ const App = () => {
           .catch((err) => {
             throw err;
           });
-      })
-      .catch((err) => {
-        throw err;
-      });
+      // })
+      // .catch((err) => {
+      //   throw err;
+      // });
   };
 
   useState(getOneProduct);
@@ -124,7 +148,12 @@ const App = () => {
         </div>
         <div className="gridSpacer" />
         <div className="gridSpacer" />
-        <ProductDetailsView product={product} styles={styles} selectedStyle={selectedStyle} />
+        <ProductDetailsView
+          product={product}
+          styles={styles}
+          selectedStyle={selectedStyle}
+          handleStyleClick={handleStyleClick}
+        />
         <div className="gridSpacer" />
         <div className="gridSpacer" />
         <ProductDescription product={product} styles={styles} selectedStyle={selectedStyle} />

@@ -49,12 +49,12 @@ const App = () => {
 
   // functions
   const handleStyleClick = (e) => {
-    setSelectedStyle(parseInt((e.target.attributes.styleidx.value), 10));
+    setSelectedStyle(parseInt(e.target.attributes.styleidx.value), 10);
   };
 
   const getOneProduct = () => {
     // this url tests for 4+ styles and items on sale
-    // const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20118';
+    const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20103';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
     const productLimit = 20;
@@ -79,49 +79,65 @@ const App = () => {
         count: 1,
       },
     })
-      .then((styleRes) => {
-        // console.log(styleRes);
-        setStyles(styleRes.data.results);
-        // get the reviews meta data from the default product id
-        axios.get(`${url}reviews/meta?product_id=${styleRes.data.product_id}`, {
+      .then((productRes) => {
+        // console.log(productRes.data[0]);
+        setProduct(productRes.data);
+        console.log('product', productRes.data)
+        // get the styles data from the default product id
+        axios.get(`${randomProductUrl}/styles`, {
           headers: {
             Authorization: TOKEN,
           },
         })
-          .then((ratingMeta) => {
-            const metaData = ratingMeta.data;
-            // determine the total reviews from the recommended
-            const good = metaData.recommended.true ? parseInt(metaData.recommended.true, 10) : 0;
-            const bad = metaData.recommended.false ? parseInt(metaData.recommended.false, 10) : 0;
-            const totalReviews = good + bad;
-            setMeta(metaData);
-            // get all reviews for the default product id
-            axios.get(`${url}reviews/?product_id=${styleRes.data.product_id}&count=${totalReviews}`, {
+          .then((styleRes) => {
+            // console.log(styleRes);
+            setStyles(styleRes.data.results);
+            console.log('style res', styleRes.data.results)
+            // get the reviews meta data from the default product id
+            // console.log(styleRes.data)
+            axios.get(`${url}reviews/meta?product_id=${productRes.data.id}`, {
               headers: {
                 Authorization: TOKEN,
               },
             })
-              .then((allReviews) => {
-                setReviews(allReviews.data.results);
-                // get questions for q&a
-                axios.get(`${url}qa/questions/?product_id=${styleRes.data.product_id}`, {
+              .then((ratingMeta) => {
+                console.log(ratingMeta.data)
+                // console.log(ratingMeta.data);
+                const metaData = ratingMeta.data;
+                const totalReviews = parseInt(metaData.recommended.false, 10)
+                                 + parseInt(metaData.recommended.true, 10);
+                setMeta(metaData);
+                // get all reviews for the default product id
+                axios.get(`${url}reviews/?product_id=${productRes.data.id}&count=${totalReviews}`, {
                   headers: {
                     Authorization: TOKEN,
                   },
                 })
-                  .then((question) => {
-                    setQuestions(question.data.results);
+                  .then((reviews) => {
+                    setReviews(reviews.data.results);
+                    // get questions for q&a
+                    axios.get(`${url}qa/questions/?product_id=${productRes.data.id}`, {
+                      headers: {
+                        Authorization: TOKEN,
+                      },
+                    })
+                      .then((question) => {
+                        setQuestions(question.data.results);
+                      })
+                      .catch((err) => {
+                        console.log('error getting questions', err);
+                      });
                   })
                   .catch((err) => {
-                    console.log('error getting questions', err);
+                    console.log('error getting reviews', err);
                   });
               })
               .catch((err) => {
-                console.log('error getting reviews', err);
+                console.log('error getting meta data', err);
               });
           })
           .catch((err) => {
-            console.log('error getting meta data', err);
+            throw err;
           });
       })
       .catch((err) => {
@@ -130,8 +146,6 @@ const App = () => {
   };
 
   useState(getOneProduct);
-
-  console.log(product);
 
   return (
     <div className="">

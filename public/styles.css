@@ -146,11 +146,6 @@ body {
   margin-left: 20px;
 }
 
-#imgNormalView {
-  display: block;
-  width: 800px;
-  height: 700px;
-}
 
 
 #productDiscContainer {
@@ -159,6 +154,37 @@ body {
 #productDiscContainer > ul{
   width: auto;
 }
+
+/* img normal view */
+
+#imgSlider {
+  width: 800px;
+  background-color: yellow;
+  height: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  overflow: hidden;
+}
+
+.imgNormalSlide{
+  float: left;
+  margin: 0px;
+  padding: 0px;
+  height: 700px;
+  width: 800px;
+  position: relative;
+}
+
+.imgContainer {
+  width: 5600px;
+  background-color: pink;
+  height: 700px;
+  clear: both;
+  position: relative;
+}
+
+
 
 /*product details*/
 
@@ -336,6 +362,15 @@ body {
 .accordion-a-content {
   overflow: scroll;
   transition: max-height 0.6s ease;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  transition: max-height 0.6s ease;
+=======
+  transition: max-height 0.6s ease;
+  background-color: whitesmoke;
+=======
+>>>>>>> master
 }
 
 .accordion-q-section {
@@ -348,6 +383,10 @@ body {
   color: #444;
   overflow: hidden;
   cursor: pointer;
+<<<<<<< HEAD
+  padding: 18px;
+=======
+>>>>>>> master
   display: flex;
   transition: background-color 0.6s ease;
   margin-right: auto;
@@ -382,6 +421,11 @@ body {
 
 .chevron-rotate {
   transform: rotate(90deg);
+<<<<<<< HEAD
+>>>>>>> questions accordion done and fixed count issue
+>>>>>>> master
+=======
+>>>>>>> master
 }
 
 .accordion-q:hover,

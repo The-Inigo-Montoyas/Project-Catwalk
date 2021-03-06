@@ -34,24 +34,24 @@ const QuestionsList = (props) => {
     }
   };
   // console.log(data);
-  const restOfQuestions = data.slice(2, data.length);
+  // const restOfQuestions = data.slice(2, data.length);
   // console.log(restOfQuestions);
 
-  const MoreQuestions = () => {
-    if (data.length > 4) {
-      return (
-        <div>
-          <QuestionsAccordion
-            titleQ="More Answered Questions"
-            contentQ={restOfQuestions.map(
-              (question) => <QuestionEntry key={question.question_id} question={question} />,
-            )}
-          />
-        </div>
-      );
-    }
-    return <></>;
-  };
+  // const MoreQuestions = () => {
+  //   if (data.length > 4) {
+  //     return (
+  //       <div>
+  //         <QuestionsAccordion
+  //           titleQ="More Answered Questions"
+  //           contentQ={restOfQuestions.map(
+  //             (question) => <QuestionEntry key={question.question_id} question={question} />,
+  //           )}
+  //         />
+  //       </div>
+  //     );
+  //   }
+  //   return <></>;
+  // };
 
   const MoreQuestions = () => {
     if (data.length > 4) {

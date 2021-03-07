@@ -94,7 +94,7 @@ const App = () => {
     // this url tests for 4+ styles and items on sale
     const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20104';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
-    const url = 'http://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
+    const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
     const productLimit = 20;
     const randomNumberGenerator = (max) => {
       let result = Math.floor(Math.random() * Math.floor(max) + 1);

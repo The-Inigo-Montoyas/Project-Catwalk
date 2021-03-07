@@ -10,7 +10,7 @@ const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 app.use(express.static(PUBLIC_DIR));
 app.use(express.json());
 
-const url = 'http://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
+const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
 const TOKEN = require('../config.js');
 
 // API request to get the reviews based on a different sort option

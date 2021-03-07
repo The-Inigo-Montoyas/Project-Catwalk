@@ -47,6 +47,7 @@ const App = () => {
   const [reviews, setReviews] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [imgView, setImgView] = useState(0);
+  const [overallRating, setRating] = useState(0);
 
   // functions
   const handleImgThumbnailClick = (e) => {
@@ -67,14 +68,33 @@ const App = () => {
   };
 
   const handleStyleClick = (e) => {
-    setSelectedStyle(parseInt(e.target.attributes.styleidx.value), 10);
+    setSelectedStyle(parseInt(e.target.attributes.styleidx.value, 10));
+  };
+
+  const getOverallRating = (data) => {
+    // find the overall star rating
+    const stars = {};
+    let totalReviews = 0;
+    let weightedTotal = 0;
+    let weightedAvg = 0.0;
+    const ratings = Object.keys(data.ratings);
+    for (let i = 0; i < ratings.length; i += 1) {
+      stars[ratings[i]] = parseInt(data.ratings[ratings[i]], 10);
+      totalReviews += stars[ratings[i]];
+      weightedTotal += stars[ratings[i]] * parseInt(ratings[i], 10);
+    }
+    if (totalReviews) {
+      weightedAvg = Math.round(10 * (weightedTotal / totalReviews)) / 10;
+    }
+    // setRating(weightedAvg);
+    return weightedAvg;
   };
 
   const getOneProduct = () => {
     // this url tests for 4+ styles and items on sale
     const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20104';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
-    const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
+    const url = 'http://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
     const productLimit = 20;
     const randomNumberGenerator = (max) => {
       let result = Math.floor(Math.random() * Math.floor(max) + 1);
@@ -100,7 +120,7 @@ const App = () => {
       .then((productRes) => {
         // console.log(productRes.data[0]);
         setProduct(productRes.data);
-        console.log('product', productRes.data)
+        // console.log('product', productRes.data);
         // get the styles data from the default product id
         // axios.get(`${randomProductUrl}/styles`, {
         axios.get(`${targetedProductURL}/styles`, {
@@ -120,17 +140,19 @@ const App = () => {
               .then((ratingMeta) => {
                 // console.log(ratingMeta.data);
                 const metaData = ratingMeta.data;
-                const totalReviews = parseInt(metaData.recommended.false, 10)
-                                 + parseInt(metaData.recommended.true, 10);
+                const good = parseInt(metaData.recommended.true, 10) || 0;
+                const bad = parseInt(metaData.recommended.false, 10) || 0;
+                const totalReviews = good + bad;
                 setMeta(metaData);
+                setRating(getOverallRating(metaData));
                 // get all reviews for the default product id
                 axios.get(`${url}reviews/?product_id=${productRes.data.id}&count=${totalReviews}`, {
                   headers: {
                     Authorization: TOKEN,
                   },
                 })
-                  .then((reviews) => {
-                    setReviews(reviews.data.results);
+                  .then((allReviews) => {
+                    setReviews(allReviews.data.results);
                     // get questions for q&a
                     axios.get(`${url}qa/questions/?product_id=${productRes.data.id}`, {
                       headers: {
@@ -196,7 +218,11 @@ const App = () => {
         <div className="gridSpacer" />
         <div className="gridSpacer" />
         <div id="reviews-ratings">
-          <RatingsApp metaData={meta} reviews={reviews} setReviews={setReviews} />
+          <RatingsApp
+            metaData={meta}
+            reviews={reviews}
+            setReviews={setReviews}
+          />
         </div>
         <div className="gridSpacer" />
       </div>

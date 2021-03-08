@@ -47,28 +47,64 @@ const App = () => {
   const [reviews, setReviews] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [imgView, setImgView] = useState(0);
+  const [thumbnailView, setThumbnailView] = useState(0);
+  const [selectedStyleImgMemory, setSelectedStyleImgMemory] = useState([]);
   const [overallRating, setRating] = useState(0);
 
   // functions
+  const styleMemArrMaker = (numOfStyles) => {
+    const arr = [];
+    for (let i = 0; i < numOfStyles; i += 1) {
+      arr.push(0);
+    }
+    return arr;
+  };
+
   const handleImgThumbnailClick = (e) => {
-    const targetValueToNum = parseInt(e.target.attributes.value.value, 10);
-    setImgView(parseInt(targetValueToNum), 10);
+    const thumbnailViewIdx = parseInt(e.target.attributes.value.value, 10);
+    const arr = selectedStyleImgMemory;
+    arr[selectedStyle] = thumbnailViewIdx;
+    setImgView(thumbnailViewIdx);
+    setSelectedStyleImgMemory(arr);
   };
 
   const handleArrowClick = (e) => {
     const direction = e.target.attributes.value.value;
+    const updatedImgView = parseInt(e.target.attributes[3].value, 10);
+    const updatedThumbnailView = parseInt(e.target.attributes[4].value, 10)
     const photoMax = styles[selectedStyle].photos.length - 1;
-    setImgView(imgView + 1);
+    const arr = selectedStyleImgMemory;
+
     if (direction === 'left') {
+      arr[selectedStyle] = imgView === photoMax ? photoMax : updatedImgView - 1;
+      setSelectedStyleImgMemory(arr);
       setImgView(imgView === 0 ? 0 : imgView - 1);
     }
     if (direction === 'right') {
+      arr[selectedStyle] = imgView === photoMax ? photoMax : updatedImgView + 1;
+      setSelectedStyleImgMemory(arr);
       setImgView(imgView === photoMax ? photoMax : imgView + 1);
+    }
+    if (direction === 'up') {
+      setThumbnailView(thumbnailView - 1);
+      if (imgView >= thumbnailView) {
+        setImgView(imgView - 1);
+      }
+      console.log('up', thumbnailView);
+    }
+    if (direction === 'down') {
+      setThumbnailView(updatedThumbnailView + 1);
+      if (imgView <= thumbnailView) {
+        setImgView(imgView + 1);
+      }
+      console.log('down', thumbnailView);
+      console.log(parseInt(e.target.attributes[4].value, 10));
     }
   };
 
   const handleStyleClick = (e) => {
     setSelectedStyle(parseInt(e.target.attributes.styleidx.value, 10));
+    setImgView(selectedStyleImgMemory[parseInt(e.target.attributes.styleidx.value, 10)]);
   };
 
   const getOverallRating = (data) => {
@@ -118,9 +154,7 @@ const App = () => {
       },
     })
       .then((productRes) => {
-        // console.log(productRes.data[0]);
         setProduct(productRes.data);
-        // console.log('product', productRes.data);
         // get the styles data from the default product id
         // axios.get(`${randomProductUrl}/styles`, {
         axios.get(`${targetedProductURL}/styles`, {
@@ -129,9 +163,10 @@ const App = () => {
           },
         })
           .then((styleRes) => {
+            setSelectedStyleImgMemory(styleMemArrMaker(styleRes.data.results.length));
             setStyles(styleRes.data.results);
             // get the reviews meta data from the default product id
-            console.log(styleRes.data)
+            console.log('style', styles);
             axios.get(`${url}reviews/meta?product_id=${productRes.data.id}`, {
               headers: {
                 Authorization: TOKEN,
@@ -202,7 +237,9 @@ const App = () => {
           product={product}
           styles={styles}
           selectedStyle={selectedStyle}
+          selectedStyleImgMemory={selectedStyleImgMemory}
           imgView={imgView}
+          thumbnailView={thumbnailView}
           handleStyleClick={handleStyleClick}
           handleArrowClick={handleArrowClick}
           handleImgThumbnailClick={handleImgThumbnailClick}

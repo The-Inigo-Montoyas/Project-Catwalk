@@ -15,13 +15,15 @@ const ProductDescription = (props) => {
       <div className="border flexGrow1">
         <ul>
           {product.features.map((feature) => (
-            <li>
+            <li key={`li${feature.value}`}>
               <img
-                src="./img/checkmark.png" className="featureCheckmark"
+                src="./img/checkmark.png"
+                className="featureCheckmark"
                 alt="checkmark"
+                key={`checkmark${feature.value}`}
               />
-              {`${feature.feature} `}
-              {feature.value === null ? '' : feature.value}
+              <span key={`feature${feature.value}`}>{`${feature.feature} `}</span>
+              {feature.value === null ? <span key={`value${feature.value}`} /> : <span key={`value${feature.value}`}>{feature.value}</span>}
             </li>
           ))}
         </ul>

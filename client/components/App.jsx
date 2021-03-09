@@ -73,7 +73,7 @@ const App = () => {
   const handleArrowClick = (e) => {
     const direction = e.target.attributes.value.value;
     const updatedImgView = parseInt(e.target.attributes[3].value, 10);
-    const updatedThumbnailView = parseInt(e.target.attributes[4].value, 10)
+    const updatedThumbnailView = parseInt(e.target.attributes[4].value, 10);
     const photoMax = styles[selectedStyle].photos.length - 1;
     const arr = selectedStyleImgMemory;
 
@@ -130,7 +130,7 @@ const App = () => {
 
   const getOneProduct = () => {
     // this url tests for 4+ styles and items on sale
-    const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20104';
+    const targetedProductUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20113';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
     const productLimit = 20;
@@ -147,7 +147,7 @@ const App = () => {
     // console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
-    axios.get(targetedProductURL, {
+    axios.get(randomProductUrl, {
       headers: {
         Authorization: TOKEN,
       },
@@ -159,7 +159,7 @@ const App = () => {
         setProduct(productRes.data);
         // get the styles data from the default product id
         // axios.get(`${randomProductUrl}/styles`, {
-        axios.get(`${targetedProductURL}/styles`, {
+        axios.get(`${randomProductUrl}/styles`, {
           headers: {
             Authorization: TOKEN,
           },

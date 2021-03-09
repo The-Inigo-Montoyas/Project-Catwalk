@@ -14,6 +14,7 @@ const ProductDetails = (props) => {
   // const [qty, setQty] = useState(0);
   const [SKU, setSKU] = useState(0);
   const [arr, setArr] = useState([0]);
+  const someNumToSatisfyStarRating = 1059;
   // let arr = [];
 
   const arrMaker = (itemQty) => {
@@ -43,7 +44,10 @@ const ProductDetails = (props) => {
     <div id="productView">
       {/* {console.log(arr)} */}
       <div className="ratingsComponent">
-        <StarRating number={overallRating} />
+        <StarRating
+          number={overallRating}
+          uniqNum={someNumToSatisfyStarRating}
+        />
       </div>
       {/* {console.log('this is product', product)} */}
       <span className="paddingTop15px">{product.category}</span>
@@ -82,13 +86,13 @@ const ProductDetails = (props) => {
         {/* <select id="sizeBar" name="SELECT SIZE" onChange={(e) => { setSKU(e.target.value); }}> */}
           <option value="">Select Size</option>
           {Object.entries(styles[selectedStyle].skus).map((key) => (
-            key[1].quantity !== 0 ? <option value={key[0]} key={`${key[0]}${key[1].size}`}>{key[1].size}</option> : <option key={`${key[0]}${key[1].size}`}/>
+            key[1].quantity !== 0 ? <option value={key[0]} key={`size${key[0]}${key[1].size}`}>{key[1].size}</option> : <option key={`size${key[0]}${key[1].size}`} className="hiddenEle">null</option>
           ))}
         </select>
         <select id="qtyBar" className="" name="QUANTITY">
           <option>Select Qty</option>
           {arr.map((item) => (
-            <option>
+            <option key={`option${item}`}>
               {item}
             </option>
           ))}

@@ -25,7 +25,7 @@ const ImageGallery = (props) => {
           <img
             src={photo.url}
             alt={photo.url}
-            key={photo.urs}
+            key={`photo${photo.url}`}
             className="imgNormalSlide"
           />
         ))}
@@ -38,7 +38,7 @@ const ImageGallery = (props) => {
           src="./img/arrow.png"
           alt="arrow.png"
           value="left"
-          imgViewValue={imgView}
+          imgviewvalue={imgView}
           className="leftArrow"
         />
       </button>
@@ -50,7 +50,7 @@ const ImageGallery = (props) => {
           src="./img/arrow.png"
           alt="arrow.png"
           value="right"
-          imgViewValue={imgView}
+          imgviewvalue={imgView}
           className="rightArrow"
           // style={{ left: 750 }}
         />
@@ -66,14 +66,14 @@ const ImageGallery = (props) => {
             <button
               type="button"
               onClick={handleImgThumbnailClick}
-              key={`thumbnail${photo.thumbnail_url}`}
+              key={`button${photo.thumbnail_url}`}
               className="mainImgThumbnailButton"
               style={{ top: idx * 75 }}
             >
               <img
                 src={photo.thumbnail_url}
                 alt={photo.thumbnail_url}
-                key={photo.thumbnail_url}
+                key={`img${photo.thumbnail_url}`}
                 value={idx}
                 className={imgView === idx ? 'mainImgThumbnail highlight' : 'mainImgThumbnail'}
               />
@@ -92,7 +92,7 @@ const ImageGallery = (props) => {
           alt="upper thumbnail arrow"
           className="thumbnailArrow thumbnailArrowUpper"
           value="up"
-          thumbnailView={thumbnailView}
+          thumbnailview={thumbnailView}
         />
       </button>
       <button
@@ -105,7 +105,7 @@ const ImageGallery = (props) => {
           alt="lower thumbnail arrow"
           className="thumbnailArrow thumbnailArrowLower rotate180"
           value="down"
-          thumbnailView={thumbnailView}
+          thumbnailview={thumbnailView}
         />
       </button>
     </div>

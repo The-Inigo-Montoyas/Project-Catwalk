@@ -4,3 +4,4 @@ bundle.js
 App.test.js
 *.cer
 *.pem
+*.test.jsx

@@ -6,7 +6,9 @@
     "start": "nodemon server",
     "test": "jest",
     "build": "webpack",
-    "watch": "webpack -w"
+    "watch": "webpack -w",
+    "start:prod": "something",
+    "build:prod": "webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",

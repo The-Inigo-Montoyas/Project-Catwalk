@@ -80,16 +80,17 @@ const App = () => {
     if (direction === 'left') {
       arr[selectedStyle] = imgView === photoMax ? photoMax : updatedImgView - 1;
       setSelectedStyleImgMemory(arr);
-      setImgView(imgView === 0 ? 0 : imgView - 1);
+      setImgView(imgView <= 0 ? 0 : imgView - 1);
     }
     if (direction === 'right') {
       arr[selectedStyle] = imgView === photoMax ? photoMax : updatedImgView + 1;
+      if (imgView )
       setSelectedStyleImgMemory(arr);
-      setImgView(imgView === photoMax ? photoMax : imgView + 1);
+      setImgView(imgView >= photoMax ? photoMax : imgView + 1);
     }
     if (direction === 'up') {
       setThumbnailView(thumbnailView - 1);
-      if (imgView >= thumbnailView) {
+      if (imgView >= thumbnailView + 6) {
         setImgView(imgView - 1);
       }
       console.log('up', thumbnailView);
@@ -130,7 +131,7 @@ const App = () => {
 
   const getOneProduct = () => {
     // this url tests for 4+ styles and items on sale
-    const targetedProductUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20113';
+    const targetedProductUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20104';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
     const productLimit = 20;
@@ -147,7 +148,7 @@ const App = () => {
     // console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
-    axios.get(randomProductUrl, {
+    axios.get(targetedProductUrl, {
       headers: {
         Authorization: TOKEN,
       },
@@ -158,8 +159,7 @@ const App = () => {
       .then((productRes) => {
         setProduct(productRes.data);
         // get the styles data from the default product id
-        // axios.get(`${randomProductUrl}/styles`, {
-        axios.get(`${randomProductUrl}/styles`, {
+        axios.get(`${targetedProductUrl}/styles`, {
           headers: {
             Authorization: TOKEN,
           },

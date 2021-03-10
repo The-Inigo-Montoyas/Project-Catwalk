@@ -2,3 +2,5 @@ node_modules
 config.js
 bundle.js
 App.test.js
+*.cer
+*.pem

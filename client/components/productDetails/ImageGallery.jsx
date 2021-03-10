@@ -39,7 +39,7 @@ const ImageGallery = (props) => {
           alt="arrow.png"
           value="left"
           imgviewvalue={imgView}
-          className="leftArrow"
+          className={`leftArrow ${imgView === 0 && 'hiddenEle'}`}
         />
       </button>
       <button
@@ -51,7 +51,7 @@ const ImageGallery = (props) => {
           alt="arrow.png"
           value="right"
           imgviewvalue={imgView}
-          className="rightArrow"
+          className={`rightArrow ${imgView === styles[selectedStyle].photos.length - 1 && 'hiddenEle'}`}
           // style={{ left: 750 }}
         />
       </button>

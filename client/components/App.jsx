@@ -4,6 +4,7 @@ import QuestionsList from './Questions/QuestionsList';
 import ProductDetailsView from './productDetails/ProductDetailsView';
 import ProductDescription from './productDetails/ProductDescription';
 
+const TOKEN = require('../../config.js');
 const axios = require('axios');
 
 const App = () => {

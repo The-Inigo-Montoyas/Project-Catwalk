@@ -212,19 +212,24 @@ const App = () => {
       <div className="gridContainer gridMainTemplate">
         <div className="gridSpacer" />
         <div className="header">
-          <div className="inner-header">
+          <div className="flexAuto1" />
+          <div className="flexAuto1 alignCenter flex">
             <img className="logo-img" src="./img/ankylosaur1.jpg" alt="logo" />
-            <p className="logo">Agile Creations</p>
-            <span className="header-search">
+            <span className="logo">Agile Creations</span>
+          </div>
+          <div className="flexAuto1">
+            <div className="header-search">
               <input
                 className="logo-search"
-                placeholder="search..."
+                // placeholder="search..."
                 value={newProductID}
                 onChange={(e) => { setNewProductID(e.target.value); }}
               />
-              <button type="submit" onClick={handleNewProduct}>Submit</button>
-            </span>
+              <button type="submit" className="logo-search navSubmit" onClick={handleNewProduct}>Submit</button>
+            </div>
           </div>
+
+
         </div>
         <div className="gridSpacer" />
         <div className="gridSpacer" />

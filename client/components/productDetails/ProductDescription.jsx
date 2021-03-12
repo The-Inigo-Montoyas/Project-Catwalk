@@ -5,14 +5,14 @@ const ProductDescription = (props) => {
 
 
   return (
-    <div id="productDiscContainer" className="border">
+    <div id="productDiscContainer" className="">
       <div className="flexGrow3">
         <h3>{product.slogan}</h3>
         <span>
           {product.description}
         </span>
       </div>
-      <div className="border flexGrow1">
+      <div className="flexGrow1">
         <ul>
           {product.features.map((feature) => (
             <li key={`li${feature.value}`}>

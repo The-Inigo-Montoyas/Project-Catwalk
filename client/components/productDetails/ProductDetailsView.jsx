@@ -20,8 +20,8 @@ const ProductDetailsView = (props) => {
   // console.log(styles[selectedStyle].photos[0].url)
 
   return (
-    <div id="productContainer" className="border">
-      <div id="productImageView" className="border">
+    <div id="productContainer" className="">
+      <div id="productImageView" className="">
         <ImageGallery
           product={product}
           styles={styles}

@@ -16,7 +16,7 @@ const Reviews = ({ reviews, metaData, setReviews }) => {
         .then((resData) => setReviews(resData.data.results))
         .catch((err) => console.log('error in the post', err));
     } else {
-      axios.get(`/reviews/id=${metaData.product_id}&count=${reviews.length}`)
+      axios.get(`/reviews/id=${metaData.product_id}&count=${reviews.length}&sort=${sortOrder}`)
         .then((resData) => setReviews(resData.data.results))
         .catch((err) => console.log('error in the post', err));
     }

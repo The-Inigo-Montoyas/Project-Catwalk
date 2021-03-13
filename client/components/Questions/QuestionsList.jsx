@@ -20,7 +20,8 @@ const QuestionsList = ({questions, product}) => {
     setDisplay(true);
     if (value.length >= 2) {
       const filteredArr = data.filter(
-        (question) => {return question.question_body.includes(value)});
+        (question) => (question.question_body.includes(value)),
+      );
       setFiltered(filteredArr);
     }
     if (value.length <= 1) {

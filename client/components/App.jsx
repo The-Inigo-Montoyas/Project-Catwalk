@@ -49,7 +49,6 @@ const App = () => {
   const [thumbnailView, setThumbnailView] = useState(0);
   const [selectedStyleImgMemory, setSelectedStyleImgMemory] = useState([]);
   const [overallRating, setRating] = useState(0);
-  const [productName, setProductName] = useState('');
   const [newProductID, setNewProductID] = useState('');
 
   // functions
@@ -149,7 +148,6 @@ const App = () => {
           .then((styleRes) => {
             setSelectedStyleImgMemory(styleMemArrMaker(styleRes.data.results.length));
             setStyles(styleRes.data.results);
-            setProductName(productRes.data.name);
             setStyles(styleRes.data.results);
             // get the reviews meta data from the default product id
             axios.get(`reviews/meta/id=${productID}`)
@@ -249,7 +247,7 @@ const App = () => {
         <div className="gridSpacer" />
         <div className="gridSpacer" />
         <div id="questions-answers">
-          <QuestionsList questions={questions} product={product} productName={productName} />
+          <QuestionsList questions={questions} product={product} />
         </div>
         <div className="gridSpacer" />
         <div className="gridSpacer" />

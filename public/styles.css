@@ -551,7 +551,7 @@ body {
 }
 
 .accordion-q {
-  background-color: #eee;
+  background-color: whitesmoke;
   color: #444;
   overflow: hidden;
   cursor: pointer;
@@ -566,6 +566,7 @@ body {
   padding: 10px;
   margin: 10px;
   border: 1px;
+  margin-top: 20px;
 }
 
 .accordion-q:hover,
@@ -576,6 +577,7 @@ body {
 .accordian-q-content {
   overflow: scroll;
   transition: max-height 0.6s ease;
+  background-color: whitesmoke;
   /* display: flex;
   position: absolute;
   bottom: 0px;
@@ -601,6 +603,7 @@ body {
 .accordion-q-content {
   overflow: scroll;
   transition: max-height 0.6s ease;
+  background-color: whitesmoke;
 }
 
 .accordion-a-title {
@@ -639,11 +642,11 @@ body {
 }
 
 .modal-a-content, .modal-q-content {
-  width: auto;
   background-color: whitesmoke;
   margin: 20% auto;
   padding: 20px;
-  width: 65%;
+  width: 600px;
+  min-width: 300px;
   min-height: 300px;
   text-align: center;
 }
@@ -677,10 +680,14 @@ body {
   margin: 10px;
   cursor: pointer;
   border: 1px;
+  transition: background-color 0.6s ease;
+  color: #444;
+  background-color: whitesmoke;
 }
 
 .disclaimer {
   font-size: 13px;
+  margin-top: 3px;
 }
 
 .input-email {
@@ -688,10 +695,29 @@ body {
 }
 
 .modal-name, .submit {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
+.close-q-btn {
+  color: rgba(0, 0, 0, 0.79);
+  float: right;
+  font-size: 30px;
+  border: none;
+  background-color: whitesmoke
+}
+
+.submit-ques {
+  margin-top: 10px;
+}
+
+.close-a-btn {
+  color: rgba(0, 0, 0, 0.79);
+  float: right;
+  font-size: 30px;
+  border: none;
+  background-color: whitesmoke
+}
 
 
 

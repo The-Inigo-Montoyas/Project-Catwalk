@@ -55,6 +55,7 @@ const QuestionsModal = ({productId, productName, onCloseQues, showQ}) => {
     <div className="modal-q">
       <div className="modal-q-content">
         <div className="modal-q-header">
+          <button type="button" onClick={onCloseQues} className="close-q-btn">&times;</button>
           <h4 className="modal-q-title"> Ask Your Question </h4>
           <h4 className="modal-q-title">
             About the
@@ -81,11 +82,9 @@ const QuestionsModal = ({productId, productName, onCloseQues, showQ}) => {
               For authentication reasons, you will not be emailed
             </div>
           </div>
-          <button type="button" onClick={handleQuestionSubmit}>Submit Your Question Here</button>
+          <button type="button" onClick={handleQuestionSubmit} className="submit-ques">Submit Your Question Here</button>
         </form>
-        <div className="modal-q-footer">
-          <button type="button" onClick={onCloseQues} className="close-q-btn">Close</button>
-        </div>
+        <div className="modal-q-footer" />
       </div>
     </div>
   );

@@ -64,6 +64,7 @@ const AnswerModal = ( {show, questionBody, onClose}) => {
     <div className="modal-a">
       <div className="modal-a-content">
         <div className="modal-a-header">
+          <button type="button" onClick={onClose} className="close-a-btn">&times;</button>
           <h4 className="modal-a-title"> Submit Your Answer </h4>
           <h4 className="modal-a-title">
             {questionBody.question_body}
@@ -94,9 +95,7 @@ const AnswerModal = ( {show, questionBody, onClose}) => {
             <button type="button" onClick={handleAnswerSubmit}>Submit Your Answer Here</button>
           </div>
         </form>
-        <div className="modal-a-footer">
-          <button type="button" onClick={onClose} className="close-a-btn">Close</button>
-        </div>
+        <div className="modal-a-footer" />
       </div>
     </div>
   );

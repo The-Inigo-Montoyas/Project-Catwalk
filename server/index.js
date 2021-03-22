@@ -5,7 +5,6 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const { reset } = require('nodemon');
-const TOKEN = '15391204e375000a377742c9b3be3f78da4d3208';
 
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 

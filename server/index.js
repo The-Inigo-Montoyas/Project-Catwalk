@@ -5,7 +5,6 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const { reset } = require('nodemon');
-const TOKEN = require('../config.js');
 
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 
@@ -40,23 +39,29 @@ app.get('/styles/:params', (req, res) => {
 });
 
 // API request to get the reviews based on a different sort option
-app.get('/reviews/:params', (req, res) => {
-  const { params } = req.params;
-  axios.get(`${url}reviews/?product_${params}`, {
-    headers: { Authorization: TOKEN },
-  })
+app.get('/reviews/:id/:sort', (req, res) => {
+  const { id, sort } = req.params;
+  axios.get(`http://localhost:3003/reviews/${id}/${sort}`)
     .then((data) => res.send(data.data))
-    .catch((err) => console.log('error getting reviews', err.response.data));
+    .catch((err) => console.log(err));
+  // axios.get(`${url}reviews/?product_${params}`, {
+  //   headers: { Authorization: TOKEN },
+  // })
+  //   .then((data) => res.send(data.data))
+  //   .catch((err) => console.log('error getting reviews', err.response.data));
 });
 
 // API request to get the reviews meta data
-app.get('/reviews/meta/:params', (req, res) => {
-  const { params } = req.params;
-  axios.get(`${url}reviews/meta?product_${params}`, {
-    headers: { Authorization: TOKEN },
-  })
-    .then((data) => res.send(data.data))
-    .catch((err) => console.log('error getting reviews', err.response.data));
+app.get('/api/reviews/meta/:id', (req, res) => {
+  const { id } = req.params;
+  axios.get(`http://localhost:3003/api/reviews/meta/${id}`)
+    .then(({ data }) => res.send(data))
+    .catch((err) => console.log(err));
+  // axios.get(`${url}reviews/meta?product_${id}`, {
+  //   headers: { Authorization: TOKEN },
+  // })
+  //   .then((data) => res.send(data.data))
+  //   .catch((err) => console.log('error getting reviews', err.response.data));
 });
 
 app.get('/questions/:params', (req, res) => {
@@ -70,36 +75,45 @@ app.get('/questions/:params', (req, res) => {
 
 // API request to increment the helpfulness counter
 app.put('/reviews/help', (req, res) => {
-  axios.put(`${url}reviews/${req.body.id}/helpful`, { body: { review_id: req.body.id } }, {
-    headers: { Authorization: TOKEN },
-  })
-    .then(() => res.sendStatus(204))
-    .catch((err) => console.log('server help error', err));
+  axios.put(`http://localhost:3003/reviews/help`, { body: { id: req.body.id } })
+    .then(() => res.send(204))
+    .catch(console.log);
+  // axios.put(`${url}reviews/${req.body.id}/helpful`, { body: { review_id: req.body.id } }, {
+  //   headers: { Authorization: TOKEN },
+  // })
+  //   .then(() => res.sendStatus(204))
+  //   .catch((err) => console.log('server help error', err));
 });
 
 // API request to remove the review
 app.put('/reviews/report', (req, res) => {
-  axios.put(`${url}reviews/${req.body.id}/report`, { body: { review_id: req.body.id } }, {
-    headers: { Authorization: TOKEN },
-  })
+  axios.put(`http://localhost:3003/reviews/report`, { body: { review_id: req.body.id } })
     .then(() => res.send(204))
-    .catch((err) => console.log('server report error', err));
+    .catch(console.log);
+  // axios.put(`${url}reviews/${req.body.id}/report`, { body: { review_id: req.body.id } }, {
+  //   headers: { Authorization: TOKEN },
+  // })
+  //   .then(() => res.send(204))
+  //   .catch((err) => console.log('server report error', err));
 });
 
 // API request to post a new review
 app.post('/newReview/', (req, res) => {
   console.log('at the server', req.body);
-  axios.post(`${url}reviews`, req.body.reviewObj, {
-    headers: { Authorization: TOKEN },
-  })
-    .then((response) => {
-      console.log('server review submit success');
-      res.sendStatus(201);
-    })
-    .catch((err) => {
-      console.log('server review submit error', err);
-      res.sendStatus(500);
-    });
+  axios.post(`http://localhost:3003/newReview`, req.body.reviewObj)
+    .then(() => res.send(201))
+    .catch(console.log);
+  // axios.post(`${url}reviews`, req.body.reviewObj, {
+  //   headers: { Authorization: TOKEN },
+  // })
+  //   .then((response) => {
+  //     console.log('server review submit success');
+  //     res.sendStatus(201);
+  //   })
+  //   .catch((err) => {
+  //     console.log('server review submit error', err);
+  //     res.sendStatus(500);
+  //   });
 });
 
 // API request to post a new answer to an existing question

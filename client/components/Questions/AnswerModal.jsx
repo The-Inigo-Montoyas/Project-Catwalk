@@ -75,7 +75,7 @@ const AnswerModal = ( {show, questionBody, onClose}) => {
           <div>
             <textarea value={answerValue} maxLength="1000" rows="5" cols="37" onChange={handleAnswer} />
           </div>
-          <div className="modal-name"> 
+          <div className="modal-name">
             What is your nickname*
             <input type="text" value={nickname} maxLength="60" onChange={handleNickname} placeholder="Example: jack543!" />
             <div className="disclaimer">

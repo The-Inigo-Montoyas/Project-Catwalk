@@ -3,7 +3,10 @@ import AnswerEntry from './AnswerEntry';
 import AnswerAccordion from './AnswerAccordion';
 
 const AnswersList = ({answer}) => {
-  const answerValues = Object.values(answer);
+  let answerValues = [];
+  if (answer !== null) {
+    answerValues = Object.values(answer);
+  }
   const helpfulSort = answerValues.sort((a, b) => (b.helpfulness - a.helpfulness));
 
   const sellers = () => {

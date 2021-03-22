@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const { reset } = require('nodemon');
-const TOKEN = require('../config.js');
+const TOKEN = '15391204e375000a377742c9b3be3f78da4d3208';
 
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 
@@ -61,10 +61,10 @@ app.get('/reviews/meta/:params', (req, res) => {
 
 app.get('/questions/:params', (req, res) => {
   const { params } = req.params;
-  axios.get(`${url}qa/questions/?product_${params}`, {
-    headers: { Authorization: TOKEN },
-  })
-    .then((data) => res.send(data.data))
+  axios.get(`http://localhost:3001/qa/${params}`)
+    .then((data) => {
+      res.send(data.data)
+    })
     .catch((err) => console.log('error getting questions', err.response.data));
 });
 
@@ -105,9 +105,7 @@ app.post('/newReview/', (req, res) => {
 // API request to post a new answer to an existing question
 app.post('/api/qa/questions/:questionId/answers', (req, res) => {
   const { questionId } = req.params;
-  axios.post(`${url}qa/questions/${questionId}/answers`, req.body.params, {
-    headers: { Authorization: TOKEN },
-  })
+  axios.post(`http://localhost:3001/qa/${questionId}/answers`, req.body.params)
     .then((response) => {
       console.log('server answer submit response');
       res.send(201);
@@ -120,9 +118,7 @@ app.post('/api/qa/questions/:questionId/answers', (req, res) => {
 
 // API request to post a new question
 app.post('/api/qa/questions', (req, res) => {
-  axios.post(`${url}qa/questions`, req.body, {
-    headers: { Authorization: TOKEN },
-  })
+  axios.post('http://localhost:3001/qa/questions', req.body)
     .then((response) => {
       console.log('server question submit response');
       res.sendStatus(201);
@@ -136,9 +132,8 @@ app.post('/api/qa/questions', (req, res) => {
 // API request to increment the helpfulness of an answer
 app.put('/api/qa/answers/:answerId/helpful', (req, res) => {
   const { answerId } = req.params;
-  axios.put(`${url}qa/answers/${answerId}/helpful`, { body: { answer_id: req.body.id } }, {
-    headers: { Authorization: TOKEN },
-  })
+  console.log(req.params)
+  axios.put(`http://localhost:3001/qa/answer/${answerId}/helpful`)
     .then((response) => {
       console.log('server helpfulness put response');
       res.sendStatus(201);
@@ -147,14 +142,12 @@ app.put('/api/qa/answers/:answerId/helpful', (req, res) => {
       console.log('server helpfulness put error', err);
       res.sendStatus(500);
     });
-});
+}); // DONE
 
 // API request to increment the helpfulness of a question
 app.put('/api/qa/questions/:questionId/helpful', (req, res) => {
   const { questionId } = req.params;
-  axios.put(`${url}qa/questions/${questionId}/helpful`, { body: { question_id: req.body.id } }, {
-    headers: { Authorization: TOKEN },
-  })
+  axios.put(`http://localhost:3001/qa/question/${questionId}/helpful`)
     .then((response) => {
       console.log('server helpfulness question put response');
       res.sendStatus(201);
@@ -163,14 +156,12 @@ app.put('/api/qa/questions/:questionId/helpful', (req, res) => {
       console.log('server helpfulness question put error', err);
       res.sendStatus(500);
     });
-});
+}); //DONE
 
 // API request to report this answer
 app.put('/api/qa/answers/:answerId/report', (req, res) => {
   const { answerId } = req.params;
-  axios.put(`${url}qa/answers/${answerId}/report`, { body: { answer_id: req.body.id } }, {
-    headers: { Authorization: TOKEN },
-  })
+  axios.put(`http://localhost:3001/qa/answer/${answerId}/report`)
     .then((response) => {
       console.log('server report put response');
       res.sendStatus(201);
@@ -179,7 +170,7 @@ app.put('/api/qa/answers/:answerId/report', (req, res) => {
       console.log('server report put error', err);
       res.sendStatus(500);
     });
-});
+}); // DONE
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

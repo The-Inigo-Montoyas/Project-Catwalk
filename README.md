@@ -1,2 +1,2 @@
-# Project-Catwalk
+# Agile Creations
 Front End Capstone
